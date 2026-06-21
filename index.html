@@ -128,14 +128,21 @@
   .clock-place{
     margin:0 0 18px;
     font-weight:600;
-    font-size:15px;
+    /* Scale nhẹ theo màn hình để không bị lấn chỗ */
+    font-size:clamp(13px, 4vw, 15px); 
     letter-spacing:.01em;
     opacity:.92;
+    white-space:nowrap; /* Cấm xuống dòng */
+    overflow:hidden;
+    text-overflow:ellipsis; /* Nếu tên quá dài sẽ tự có dấu ... */
   }
+
   .clock-time{
     font-family:'Inter', sans-serif;
     font-weight:700;
-    font-size:clamp(32px,5.6vw,40px);
+    /* Hạ min-size xuống 24px và tăng tỷ lệ vw lên 8vw */
+    font-size:clamp(24px, 8vw, 40px);
+    white-space:nowrap; /* Ép cứng thời gian nằm trên 1 dòng */
     margin:0 0 6px;
     font-variant-numeric:tabular-nums;
     letter-spacing:-.01em;

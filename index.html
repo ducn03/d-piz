@@ -157,14 +157,32 @@
   }
   [data-period="day"] .clock-activity{ background:rgba(36,31,61,.08); }
 
-  .clock-wish{
-    margin:14px 0 0;
+  /* ---------- WISH BLOCK (dưới hai đồng hồ) ---------- */
+  .wish-block{
+    max-width:580px;
+    margin:0 auto clamp(40px,7vw,64px);
+    padding:clamp(20px,4vw,26px) clamp(22px,4vw,30px);
+    background:linear-gradient(135deg, var(--rose) 0%, var(--coral) 100%);
+    border-radius:var(--radius-lg);
+    color:#fff;
+    box-shadow:var(--shadow-soft);
+    text-align:center;
+  }
+  .wish-block-eyebrow{
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    opacity:.85;
+    margin:0 0 10px;
+    font-weight:600;
+  }
+  .wish-block-text{
     font-family:'Lora', serif;
     font-style:italic;
     font-weight:500;
-    font-size:13.5px;
-    line-height:1.5;
-    opacity:.92;
+    font-size:clamp(17px,2.6vw,20px);
+    line-height:1.55;
+    margin:0;
   }
 
   /* thread connecting the two cards */
@@ -397,12 +415,11 @@
         <p class="clock-time" id="timeVN">--:--:--</p>
         <p class="clock-date" id="dateVN">—</p>
         <p class="clock-activity" id="activityVN">—</p>
-        <p class="clock-wish" id="wishVN">—</p>
       </div>
     </div>
 
     <div class="thread" aria-hidden="true">
-      <!-- <div class="thread-line"></div> -->
+      <div class="thread-line"></div>
     </div>
 
     <div class="clock-card" id="cardBHM" data-period="night">
@@ -412,10 +429,14 @@
         <p class="clock-time" id="timeBHM">--:--:--</p>
         <p class="clock-date" id="dateBHM">—</p>
         <p class="clock-activity" id="activityBHM">—</p>
-        <p class="clock-wish" id="wishBHM">—</p>
       </div>
     </div>
 
+  </section>
+
+  <section class="wish-block" aria-label="Lời nhắc cho Piz">
+    <p class="wish-block-eyebrow">Lời nhắc cho Piz — theo giờ Bellingham</p>
+    <p class="wish-block-text" id="wishBHM">—</p>
   </section>
 
   <section class="todo" aria-label="Việc cần làm">
@@ -608,7 +629,6 @@
     const diffHours = Math.round((vn.offset - bhm.offset) / 60);
     document.getElementById('heroSub').innerHTML =
       `Cách nhau khoảng <strong>${new Intl.NumberFormat('vi-VN').format(distanceRounded)} km</strong> và chênh <strong>${diffHours} giờ</strong>`;
-    updateWishFor('VN',  ZONES.VN.tz,  now, vn.hour);
     updateWishFor('BHM', ZONES.BHM.tz, now, bhm.hour);
   }
 

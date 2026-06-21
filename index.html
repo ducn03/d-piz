@@ -51,7 +51,7 @@
   }
 
   /* ---------- HERO ---------- */
-  .hero{ text-align:center; margin-bottom:clamp(36px,6vw,56px); }
+  .hero{ text-align:center; margin-bottom:clamp(28px,5vw,40px); }
   .eyebrow{
     font-family:'JetBrains Mono', monospace;
     font-size:13px;
@@ -85,6 +85,54 @@
     font-size:12.5px;
     color:#8A8296;
     margin:0;
+  }
+
+  /* ---------- DAILY MESSAGE (for Piz) ---------- */
+  .daily-wish{
+    position:relative;
+    max-width:560px;
+    margin:0 auto clamp(36px,6vw,56px);
+    padding:clamp(20px,4vw,26px) clamp(22px,4vw,30px);
+    background:linear-gradient(135deg, var(--rose) 0%, var(--coral) 100%);
+    border-radius:var(--radius-lg);
+    color:#fff;
+    box-shadow:var(--shadow-soft);
+    text-align:center;
+    overflow:hidden;
+  }
+  .daily-wish::before{
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(120px 80px at 10% 0%, rgba(255,255,255,.25), transparent 70%),
+      radial-gradient(160px 100px at 95% 100%, rgba(255,255,255,.18), transparent 70%);
+    pointer-events:none;
+  }
+  .daily-wish-eyebrow{
+    position:relative;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    opacity:.88;
+    margin:0 0 10px;
+    font-weight:500;
+  }
+  .daily-wish-text{
+    position:relative;
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(18px,3vw,23px);
+    line-height:1.4;
+    margin:0;
+  }
+  .daily-wish-date{
+    position:relative;
+    margin:12px 0 0;
+    font-size:12px;
+    opacity:.78;
+    font-weight:500;
   }
 
   /* ---------- CLOCKS ---------- */
@@ -324,6 +372,12 @@
     display:none;
   }
 
+  .todo-note{
+    margin:16px 2px 0;
+    font-size:12px;
+    color:#C9BFA8;
+  }
+
   .footer{
     text-align:center;
     margin-top:48px;
@@ -362,6 +416,12 @@
     <p class="hero-sub" id="heroSub">Đang tính khoảng cách…</p>
   </header>
 
+  <section class="daily-wish" aria-label="Câu chúc hôm nay">
+    <p class="daily-wish-eyebrow">Câu chúc hôm nay cho Piz</p>
+    <p class="daily-wish-text" id="dailyWishText">—</p>
+    <p class="daily-wish-date" id="dailyWishDate">—</p>
+  </section>
+
   <section class="clocks" aria-label="Đồng hồ hai nơi">
 
     <div class="clock-card" id="cardVN" data-period="night">
@@ -394,7 +454,7 @@
 
   <section class="todo" aria-label="Việc cần làm">
     <h2>Việc cần làm</h2>
-    <p class="todo-sub">Lưu ngay trên trình duyệt này — mở lại vẫn còn.</p>
+    <p class="todo-sub">Danh sách được giữ trong phiên làm việc này.</p>
 
     <form id="todoForm" class="todo-form">
       <label class="visually-hidden" for="todoInput">Thêm việc mới</label>
@@ -404,6 +464,7 @@
 
     <ul class="todo-list" id="todoList"></ul>
     <p class="todo-empty" id="todoEmpty">Chưa có việc gì — thêm việc đầu tiên nhé.</p>
+    <p class="todo-note">Lưu ý: danh sách sẽ mất khi tải lại trang hoặc đóng tab — trình duyệt artifact không hỗ trợ lưu trữ lâu dài.</p>
   </section>
 
   <p class="footer">Làm với 🧡 — sẽ bổ sung thêm sau.</p>
@@ -497,6 +558,70 @@
   const distanceKm = haversineKm(21.0285, 105.8542, 48.7519, -122.4787);
   const distanceRounded = Math.round(distanceKm/100)*100;
 
+  /* ================= DAILY WISH FOR PIZ ================= */
+  const WISHES = [
+    "Piz ơi, hôm nay nhớ ăn sáng đầy đủ trước khi chạy deadline nha 🍳",
+    "Dù cách nhau cả múi giờ, hôm nay vẫn nghĩ về Piz đầu tiên 🧡",
+    "Piz cứ làm chậm lại một chút cũng được, không cần vội đâu 🌿",
+    "Hôm nay Piz làm gì cũng giỏi, nhưng nhớ uống nước nhiều nhé 💧",
+    "Mong Piz có một ngày nhẹ nhõm, ít việc khó hơn dự tính 🌤️",
+    "Piz cười nhiều hôm nay nha, dù chỉ vì chuyện nhỏ thôi cũng được 😊",
+    "Hôm nay nếu mệt thì nghỉ một chút, Piz không cần ráng sức quá 🫶",
+    "Piz nhớ ngủ đủ giấc tối nay, đừng để bản thân thiếu ngủ nữa 🌙",
+    "Chúc Piz một ngày mọi việc đều trôi qua nhẹ nhàng như mong đợi ☁️",
+    "Piz giỏi lắm rồi, hôm nay chỉ cần là chính mình thôi cũng đủ 🌟",
+    "Hôm nay có chuyện gì khó, Piz cứ kể, đừng giữ trong lòng một mình 💌",
+    "Piz nhớ ăn trưa đúng giờ, đừng để bụng đói rồi mới nhớ ra 🍱",
+    "Chúc Piz hôm nay gặp toàn điều dễ chịu, không có gì phải lo 🍃",
+    "Dù xa nhau cả đại dương, hôm nay Piz vẫn được thương như mọi ngày 🌊",
+    "Piz làm việc thì làm, nhưng đừng quên dành chút thời gian cho mình 🎧",
+    "Hôm nay Piz xứng đáng được nghỉ ngơi sớm hơn một chút 🕯️",
+    "Chúc Piz giữ được năng lượng vui vẻ tới cuối ngày luôn nha 🎈",
+    "Piz nhớ mặc đủ ấm hoặc đủ mát theo đúng kiểu thời tiết hôm nay nha 🧣",
+    "Hôm nay nếu có gì làm Piz buồn, mong nó qua nhanh thật nhanh 🍂",
+    "Piz cứ tin là mọi thứ đang đi đúng hướng, chỉ cần thêm chút thời gian 🌱",
+    "Chúc Piz một ngày được lắng nghe và được hiểu, dù là từ ai cũng được 🤍",
+    "Piz nhớ uống nước, đừng để tới khi khát mới nhớ ra 🥤",
+    "Hôm nay chúc Piz gặp được điều gì đó nho nhỏ làm vui cả ngày 🍀",
+    "Piz làm tốt rồi đó, hôm nay không cần phải làm tốt hơn nữa đâu 🌼",
+    "Chúc Piz hôm nay đi đâu cũng thấy nhẹ, làm gì cũng thấy ổn 🚶",
+    "Piz nhớ chợp mắt một chút nếu mệt giữa ngày, không sao cả 😴",
+    "Hôm nay mong Piz được ở cạnh những người làm Piz thấy an toàn 🏡",
+    "Piz giỏi việc gì thì cứ làm, còn lại để ngày mai lo cũng được 🗓️",
+    "Chúc Piz một ngày không cần gồng, cứ thoải mái là chính mình 🌸",
+    "Hôm nay dù ở múi giờ nào, Piz vẫn là người được nhớ tới đầu tiên 💛",
+    "Piz nhớ giữ sức khoẻ, đừng để công việc kéo mình đi quá xa 🌾"
+  ];
+
+  function dayKeyForVN(date){
+    // ngày theo giờ Việt Nam, dùng làm "hạt giống" ổn định trong ngày
+    const fmt = new Intl.DateTimeFormat('en-CA', { timeZone:'Asia/Ho_Chi_Minh', year:'numeric', month:'2-digit', day:'2-digit' });
+    return fmt.format(date); // "YYYY-MM-DD"
+  }
+
+  function hashStringToInt(str){
+    let h = 0;
+    for (let i=0; i<str.length; i++){
+      h = (h * 31 + str.charCodeAt(i)) >>> 0;
+    }
+    return h;
+  }
+
+  let lastWishDayKey = null;
+
+  function updateDailyWish(now){
+    const key = dayKeyForVN(now);
+    if (key === lastWishDayKey) return; // chỉ cập nhật khi đổi ngày
+    lastWishDayKey = key;
+
+    const idx = hashStringToInt(key) % WISHES.length;
+    document.getElementById('dailyWishText').textContent = WISHES[idx];
+
+    // hiển thị ngày theo định dạng dd/mm/yyyy
+    const [y,m,d] = key.split('-');
+    document.getElementById('dailyWishDate').textContent = `Theo ngày ${d}/${m}/${y} (giờ Việt Nam)`;
+  }
+
   function tick(){
     const now = new Date();
     const offVN  = updateClock('VN',  ZONES.VN.tz,  now);
@@ -504,27 +629,22 @@
     const diffHours = Math.round((offVN - offBHM) / 60);
     document.getElementById('heroSub').innerHTML =
       `Cách nhau khoảng <strong>${new Intl.NumberFormat('vi-VN').format(distanceRounded)} km</strong> và chênh <strong>${diffHours} giờ</strong>`;
+    updateDailyWish(now);
   }
 
   tick();
   setInterval(tick, 1000);
 
   /* ================= TODO LIST ================= */
-  const STORAGE_KEY = 'crush-todo-list-v1';
+  /* Lưu ý: artifact không hỗ trợ localStorage/sessionStorage, nên danh sách
+     được giữ trong biến JS (in-memory) — còn nguyên trong phiên làm việc
+     hiện tại, nhưng sẽ mất khi tải lại trang hoặc đóng tab. */
   let todos = [];
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    todos = raw ? JSON.parse(raw) : [];
-  } catch(e){ todos = []; }
 
   const listEl  = document.getElementById('todoList');
   const emptyEl = document.getElementById('todoEmpty');
   const formEl  = document.getElementById('todoForm');
   const inputEl = document.getElementById('todoInput');
-
-  function saveTodos(){
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(todos)); } catch(e){}
-  }
 
   function renderTodos(){
     listEl.innerHTML = '';
@@ -543,7 +663,6 @@
       checkbox.setAttribute('aria-label', 'Đánh dấu hoàn thành');
       checkbox.addEventListener('change', () => {
         todo.done = checkbox.checked;
-        saveTodos();
         renderTodos();
       });
 
@@ -561,7 +680,6 @@
       delBtn.textContent = '✕';
       delBtn.addEventListener('click', () => {
         todos = todos.filter(t => t.id !== todo.id);
-        saveTodos();
         renderTodos();
       });
 
@@ -576,7 +694,6 @@
     const text = inputEl.value.trim();
     if (!text) return;
     todos.push({ id: Date.now() + Math.random(), text, done:false });
-    saveTodos();
     inputEl.value = '';
     renderTodos();
     inputEl.focus();

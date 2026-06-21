@@ -550,48 +550,63 @@
   const distanceRounded = Math.round(distanceKm/100)*100;
 
   const SLOTS = [
-    { from:0,  to:5,  label:"Khuya — đang ngủ", wishes:[
-      "Giờ này Piz nên đang ngủ rồi, nếu còn thức thì nhắm mắt lại sớm nha.",
-      "Đêm khuya rồi, việc gì để sáng mai làm cũng được, ngủ trước đã.",
-      "Nếu trằn trọc thì thử để điện thoại xa ra một chút, ngủ sẽ dễ hơn."
+    { from: 0, to: 5, label: "Khuya — đang ngủ", wishes: [
+        "Giờ này chắc vạn vật tĩnh lặng hết rồi. Piz ngoan nhắm mắt lại nhé, ôm chăn thật ấm vào.",
+        "Bầu trời đêm nay nhường chỗ cho giấc mơ của Piz. Cứ ngủ thật sâu, mọi muộn phiền để mai tính nhé.",
+        "Nếu lỡ tỉnh giấc giữa đêm và trằn trọc, hãy nhớ có một người ở rất xa đang mong bé Piz bình an. Hít thở sâu và ngủ lại nha.",
+        "Thức khuya không tốt đâu bé Piz ơi. Cất điện thoại đi, nhắm mắt lại và chìm vào giấc ngủ thật êm nhé.",
+        "Ngày hôm nay Piz đã vất vả nhiều rồi. Khuya rồi, cho phép bản thân được nghỉ ngơi hoàn toàn đi thôi."
     ]},
-    { from:5,  to:7,  label:"Sáng sớm — vừa thức dậy", wishes:[
-      "Chào buổi sáng. Piz nhớ uống một ly nước trước khi làm gì khác nha.",
-      "Mới thức dậy thì đừng vội cầm điện thoại liền, hít thở một chút đã.",
-      "Buổi sáng mới bắt đầu, mong hôm nay mọi việc đều nhẹ nhàng với Piz."
+    { from: 5, to: 7, label: "Sáng sớm — vừa thức dậy", wishes: [
+        "Chào buổi sáng, Piz! Dậy uống một ngụm nước ấm cho ngày mới thật trong lành nhé.",
+        "Ánh sáng lọt qua khe cửa sổ rồi kìa. Chúc bé Piz một ngày mới dịu dàng và đầy ắp niềm vui.",
+        "Khoan vội lướt điện thoại nha, bé Piz hãy vươn vai một cái thật sảng khoái đã. Hôm nay chắc chắn sẽ là một ngày tuyệt vời.",
+        "Piz dậy chưa? Cứ thong thả bắt đầu ngày mới nhé, ở đầu dây bên kia luôn có người đợi tin nhắn của Piz.",
+        "Mở mắt ra là thấy ngày mới, và có một người ở xa vẫn luôn hướng về Piz. Chúc bé Piz buổi sáng bình an."
     ]},
-    { from:7,  to:11, label:"Buổi sáng — học / làm việc", wishes:[
-      "Đang giờ làm việc, nhớ ngồi thẳng lưng và nghỉ mắt một chút giữa giờ nha.",
-      "Sáng nay nếu việc nhiều thì cứ làm từng phần một, không cần vội hết một lúc.",
-      "Giữa giờ làm, nhớ đứng dậy đi lại vài phút cho đỡ mỏi."
+    { from: 7, to: 11, label: "Buổi sáng — học / làm việc", wishes: [
+        "Bắt đầu ngày làm việc rồi. Piz cứ bình tĩnh giải quyết từng việc một nhé, bé Piz giỏi nhất làm được mà!",
+        "Nhìn màn hình lâu nhớ chớp mắt và ngó ra cửa sổ một chút nha. Đừng để đôi mắt xinh đẹp đó bị mỏi.",
+        "Nếu sáng nay có gì khó khăn, cứ hít một hơi thật sâu. Không sao đâu, luôn có người ở phương xa ủng hộ Piz hết mình.",
+        "Công việc thì quan trọng, nhưng sức khỏe của Piz còn quan trọng hơn. Nhớ uống đủ nước và ngồi thẳng lưng lên nào.",
+        "Làm việc nỗ lực nhưng đừng vắt kiệt sức mình nhé. Nhớ giữ nhịp độ vừa phải thôi Piz."
     ]},
-    { from:11, to:13, label:"Giờ ăn trưa", wishes:[
-      "Tới giờ ăn trưa rồi, đừng để bụng đói rồi mới ăn vội nha.",
-      "Nghỉ trưa một chút, ăn no rồi mới quay lại làm tiếp cũng không sao.",
-      "Buổi trưa nhớ ăn đủ bữa, đừng bỏ qua chỉ vì đang bận."
+    { from: 11, to: 13, label: "Giờ ăn trưa", wishes: [
+        "Tới giờ nạp năng lượng rồi! Dù bận đến mấy Piz cũng phải ăn trưa đàng hoàng nhé, cấm nhịn đói đấy.",
+        "Trưa nay bé Piz ăn món gì ngon không? Nhớ nhai kỹ và tận hưởng bữa ăn, nạp đầy pin để chiều chiến tiếp nha.",
+        "Tạm gác công việc sang một bên đi nào. Ăn một bữa thật ngon, húp một chén canh ấm, thế là Piz nạp lại đủ năng lượng rồi.",
+        "Đừng vừa ăn vừa nhìn màn hình nữa. Cho tâm trí và đôi mắt được nghỉ ngơi một chút đi bé Piz.",
+        "Ăn trưa ngon miệng nhé Piz. Ăn nhiều một chút để có sức chiều nay làm việc tiếp."
     ]},
-    { from:13, to:17, label:"Buổi chiều — học / làm việc", wishes:[
-      "Chiều dễ buồn ngủ, nếu mệt thì chợp mắt vài phút cũng được, không sao cả.",
-      "Còn vài giờ nữa hết ngày làm việc, Piz cứ làm theo nhịp của mình thôi.",
-      "Buổi chiều nhớ uống nước, ngồi lâu quá thì đứng dậy vươn vai một chút."
+    { from: 13, to: 17, label: "Buổi chiều — học / làm việc", wishes: [
+        "Buổi chiều hay buồn ngủ lắm đúng không? Piz đứng dậy pha một ly trà hoặc vươn vai vài cái cho tỉnh táo nhé.",
+        "Chỉ còn một chút nữa là hết giờ làm việc rồi, cố lên bé Piz. Xong việc tự thưởng cho mình một chút thời gian thư giãn nhé.",
+        "Chiều nay Piz thấy thế nào? Cứ thong thả hoàn thành nốt công việc, đừng tự tạo áp lực cho mình quá nha.",
+        "Ngồi lâu rồi kìa, đứng lên đi lại một vòng cho giãn gân cốt đi Piz. Đừng làm việc quá sức nhé.",
+        "Gửi bé Piz một chút năng lượng từ phương xa để đánh bay cơn buồn ngủ buổi chiều nè!"
     ]},
-    { from:17, to:19, label:"Tan làm — giờ ăn tối", wishes:[
-      "Tan làm rồi, hôm nay vậy là đủ rồi, phần còn lại để ngày mai.",
-      "Giờ ăn tối, ăn món gì mình thích một chút cho thoải mái nha.",
-      "Một ngày làm việc xong rồi, Piz nghỉ ngơi một chút trước khi làm gì tiếp."
+    { from: 17, to: 19, label: "Tan làm — giờ ăn tối", wishes: [
+        "Cuối cùng cũng xong một ngày vất vả! Piz giỏi lắm, giờ thì rũ bỏ hết mệt mỏi ở chỗ làm lại phía sau đi nhé.",
+        "Tự thưởng cho mình một bữa tối thật ngon lành đi nào. Hôm nay bé Piz đã nỗ lực rất nhiều rồi.",
+        "Đường về nhà hôm nay thế nào? Về đến nơi, Piz thay bộ đồ thoải mái nhất ra rồi nằm ườn một chút cũng được.",
+        "Một ngày bận rộn đã qua rồi. Bây giờ là thời gian để bé Piz được yêu chiều bản thân mình đấy.",
+        "Về đến nhà an toàn là tốt rồi. Tắm rửa nước ấm cho trôi hết mệt nhọc ngày hôm nay nhé, Piz."
     ]},
-    { from:19, to:22, label:"Buổi tối — thư giãn", wishes:[
-      "Tối rồi, dành chút thời gian cho việc mình thích, không cần làm gì cả cũng được.",
-      "Nếu hôm nay có gì mệt, tối nay cứ để nó lại, không cần mang theo qua ngày mai.",
-      "Buổi tối nhẹ nhàng thôi, không cần giải quyết hết mọi thứ ngay bây giờ."
+    { from: 19, to: 22, label: "Buổi tối — thư giãn", wishes: [
+        "Buổi tối là thời gian của riêng Piz. Bật một bài nhạc nhẹ, đắp mặt nạ, và để tâm trí được nghỉ ngơi hoàn toàn nhé.",
+        "Nếu hôm nay thế giới có hơi khắc nghiệt với Piz, thì góc nhỏ này luôn êm ái và an toàn chờ bé Piz thư giãn.",
+        "Piz đang làm gì đó? Có đang xem bộ phim yêu thích không? Cứ tận hưởng buổi tối bình yên này nhé, luôn có người nhớ Piz.",
+        "Không cần phải hoàn hảo, không cần phải mạnh mẽ. Buổi tối ở nhà, Piz cứ là một em bé bình yên thôi.",
+        "Những chuyện chưa vui của hôm nay, mình gói ghém lại và vứt đi nhé. Tối nay chỉ có sự nhẹ nhàng dành cho bé Piz."
     ]},
-    { from:22, to:24, label:"Chuẩn bị đi ngủ", wishes:[
-      "Sắp tới giờ ngủ rồi, Piz thử để điện thoại xa giường một chút nha.",
-      "Ngày hôm nay vậy là đủ rồi, ngủ ngon để có sức cho ngày mai.",
-      "Trước khi ngủ, hít thở sâu vài lần, để đầu óc nhẹ lại rồi mới nhắm mắt."
+    { from: 22, to: 24, label: "Chuẩn bị đi ngủ", wishes: [
+        "Khuya rồi, gác lại mọi bôn ba của ngày hôm nay thôi. Cảm ơn Piz vì hôm nay đã luôn kiên cường.",
+        "Sạc pin điện thoại rồi thì cũng sạc pin cho bản thân nữa nhé. Chúc bé Piz có một giấc mơ thật đẹp.",
+        "Thả lỏng vai, hít một hơi sâu... Mọi thứ đã ổn cả rồi. Ngủ ngoan nhé Piz, ngày mai mặt trời lại lên.",
+        "Tắt đèn, kéo chăn lên tận cằm, và để mọi suy nghĩ trôi đi nhẹ nhàng. Chúc bé Piz ngủ thật ngon.",
+        "Mong đêm nay sẽ dịu dàng ôm lấy giấc ngủ của Piz. Ngủ thật ngoan để ngày mai thức dậy lại rạng rỡ nhé."
     ]}
-  ];
-
+];
   function findSlot(hour){
     return SLOTS.find(s => hour >= s.from && hour < s.to) || SLOTS[0];
   }

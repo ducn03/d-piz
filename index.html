@@ -198,11 +198,55 @@
     margin:0 0 4px;
     color:var(--ink-navy);
   }
+  .todo-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:14px;
+    margin-bottom:20px;
+  }
   .todo-sub{
-    margin:0 0 20px;
+    margin:0;
     font-size:13.5px;
     color:var(--text-muted);
   }
+  .todo-clear{
+    flex:0 0 auto;
+    border:1.5px solid #EAE0CC;
+    background:transparent;
+    color:var(--text-muted);
+    font-family:inherit;
+    font-size:12.5px;
+    font-weight:600;
+    padding:8px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .todo-clear:hover{ border-color:var(--rose); color:var(--rose); }
+  .todo-clear:disabled{ opacity:.45; cursor:default; }
+  .todo-clear:disabled:hover{ border-color:#EAE0CC; color:var(--text-muted); }
+
+  .todo-filters{
+    display:flex;
+    gap:8px;
+    margin-bottom:16px;
+  }
+  .todo-filter{
+    border:none;
+    background:var(--cream);
+    color:var(--text-muted);
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    padding:8px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+  }
+  .todo-filter:hover{ color:var(--text-dark); }
+  .todo-filter.is-active{ background:var(--rose); color:#fff; }
   .todo-form{
     display:flex;
     gap:10px;
@@ -248,11 +292,14 @@
     align-items:center;
     justify-content:space-between;
     gap:10px;
-    padding:12px 14px;
+    padding:13px 14px;
     border-radius:var(--radius-md);
     background:var(--cream);
     border:1px solid #F1E7D6;
+    transition:background .15s ease, border-color .15s ease;
   }
+  .todo-item:hover{ border-color:#EAD9C8; }
+  .todo-item.done{ background:#F7F3EA; }
   .todo-check{
     display:flex;
     align-items:center;
@@ -321,6 +368,9 @@
     .thread-line{ width:0; height:100%; border-top:none; border-left:2px dashed var(--rose); }
     .todo-form{ flex-direction:column; }
     .todo-form button{ width:100%; }
+    .todo-head{ flex-direction:column; }
+    .todo-clear{ align-self:flex-start; }
+    .todo-filters{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -369,8 +419,13 @@
   </section>
 
   <section class="todo" aria-label="Việc cần làm">
-    <h2>Việc cần làm</h2>
-    <p class="todo-sub">Danh sách được giữ trong phiên làm việc này.</p>
+    <div class="todo-head">
+      <div>
+        <h2>Việc cần làm</h2>
+        <p class="todo-sub" id="todoCount">Chưa có việc nào.</p>
+      </div>
+      <button type="button" class="todo-clear" id="todoClearDone">Xoá việc đã xong</button>
+    </div>
 
     <form id="todoForm" class="todo-form">
       <label class="visually-hidden" for="todoInput">Thêm việc mới</label>
@@ -378,9 +433,15 @@
       <button type="submit">Thêm</button>
     </form>
 
+    <div class="todo-filters" role="group" aria-label="Lọc danh sách">
+      <button type="button" class="todo-filter is-active" data-filter="all">Tất cả</button>
+      <button type="button" class="todo-filter" data-filter="active">Chưa xong</button>
+      <button type="button" class="todo-filter" data-filter="done">Đã xong</button>
+    </div>
+
     <ul class="todo-list" id="todoList"></ul>
     <p class="todo-empty" id="todoEmpty">Chưa có việc gì — thêm việc đầu tiên nhé.</p>
-    <p class="todo-note">Lưu ý: danh sách sẽ mất khi tải lại trang hoặc đóng tab — trình duyệt artifact không hỗ trợ lưu trữ lâu dài.</p>
+    <p class="todo-note">Danh sách được lưu trên trình duyệt này, mở lại vẫn còn.</p>
   </section>
 
   <p class="footer">Làm với tấm lòng — sẽ bổ sung thêm sau.</p>
@@ -554,18 +615,63 @@
   tick();
   setInterval(tick, 1000);
 
+  const STORAGE_KEY = 'crush-todo-list-v2';
   let todos = [];
+  let currentFilter = 'all';
 
-  const listEl  = document.getElementById('todoList');
-  const emptyEl = document.getElementById('todoEmpty');
-  const formEl  = document.getElementById('todoForm');
-  const inputEl = document.getElementById('todoInput');
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    todos = raw ? JSON.parse(raw) : [];
+  } catch(e){ todos = []; }
+
+  const listEl     = document.getElementById('todoList');
+  const emptyEl    = document.getElementById('todoEmpty');
+  const formEl     = document.getElementById('todoForm');
+  const inputEl    = document.getElementById('todoInput');
+  const countEl    = document.getElementById('todoCount');
+  const clearBtn   = document.getElementById('todoClearDone');
+  const filterBtns = Array.from(document.querySelectorAll('.todo-filter'));
+
+  function saveTodos(){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(todos)); } catch(e){}
+  }
+
+  function visibleTodos(){
+    if (currentFilter === 'active') return todos.filter(t => !t.done);
+    if (currentFilter === 'done')   return todos.filter(t => t.done);
+    return todos;
+  }
+
+  function updateCount(){
+    const activeCount = todos.filter(t => !t.done).length;
+    const doneCount = todos.length - activeCount;
+    if (todos.length === 0){
+      countEl.textContent = 'Chưa có việc nào.';
+    } else if (activeCount === 0){
+      countEl.textContent = 'Xong hết rồi, không còn việc nào.';
+    } else {
+      countEl.textContent = `Còn ${activeCount} việc chưa xong${doneCount ? `, ${doneCount} đã xong` : ''}.`;
+    }
+    clearBtn.disabled = doneCount === 0;
+  }
 
   function renderTodos(){
+    const items = visibleTodos();
     listEl.innerHTML = '';
-    emptyEl.style.display = todos.length === 0 ? 'block' : 'none';
 
-    todos.forEach(todo => {
+    if (todos.length === 0){
+      emptyEl.textContent = 'Chưa có việc gì — thêm việc đầu tiên nhé.';
+      emptyEl.style.display = 'block';
+    } else if (items.length === 0){
+      emptyEl.textContent = currentFilter === 'done'
+        ? 'Chưa có việc nào hoàn thành.'
+        : 'Không còn việc nào ở mục này.';
+      emptyEl.style.display = 'block';
+    } else {
+      emptyEl.style.display = 'none';
+    }
+
+    items.forEach(todo => {
       const li = document.createElement('li');
       li.className = 'todo-item' + (todo.done ? ' done' : '');
 
@@ -578,6 +684,7 @@
       checkbox.setAttribute('aria-label', 'Đánh dấu hoàn thành');
       checkbox.addEventListener('change', () => {
         todo.done = checkbox.checked;
+        saveTodos();
         renderTodos();
       });
 
@@ -595,6 +702,7 @@
       delBtn.textContent = '✕';
       delBtn.addEventListener('click', () => {
         todos = todos.filter(t => t.id !== todo.id);
+        saveTodos();
         renderTodos();
       });
 
@@ -602,6 +710,8 @@
       li.appendChild(delBtn);
       listEl.appendChild(li);
     });
+
+    updateCount();
   }
 
   formEl.addEventListener('submit', e => {
@@ -609,9 +719,24 @@
     const text = inputEl.value.trim();
     if (!text) return;
     todos.push({ id: Date.now() + Math.random(), text, done:false });
+    saveTodos();
     inputEl.value = '';
     renderTodos();
     inputEl.focus();
+  });
+
+  clearBtn.addEventListener('click', () => {
+    todos = todos.filter(t => !t.done);
+    saveTodos();
+    renderTodos();
+  });
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentFilter = btn.dataset.filter;
+      filterBtns.forEach(b => b.classList.toggle('is-active', b === btn));
+      renderTodos();
+    });
   });
 
   renderTodos();

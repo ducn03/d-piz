@@ -4,24 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hai múi giờ, một sợi dây</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A1%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink-navy:#1B1F3B;
     --deep-plum:#2E2350;
-    --cream:#FBF4E8;
+    --cream:#FBF6ED;
     --cream-dim:#F1E7D6;
-    --coral:#FF8C69;
-    --gold:#FFC971;
-    --rose:#FF6F91;
-    --text-dark:#241F3D;
-    --text-light:#FBF4E8;
-    --radius-lg:28px;
-    --radius-md:18px;
-    --shadow-soft:0 18px 40px -18px rgba(36,31,61,.35);
+    --coral:#E8896A;
+    --gold:#E0AE63;
+    --rose:#D9667F;
+    --text-dark:#2B2A33;
+    --text-muted:#6F6B72;
+    --text-light:#FBF6ED;
+    --radius-lg:24px;
+    --radius-md:16px;
+    --shadow-soft:0 16px 36px -18px rgba(36,31,61,.28);
     --maxw:960px;
   }
 
@@ -30,13 +30,13 @@
   body{
     margin:0;
     background:
-      radial-gradient(900px 500px at 85% -10%, #FFE9C7 0%, transparent 60%),
-      radial-gradient(700px 400px at -10% 110%, #FFD9DD 0%, transparent 55%),
+      radial-gradient(900px 500px at 85% -10%, #F7E9D2 0%, transparent 60%),
+      radial-gradient(700px 400px at -10% 110%, #F4DEDD 0%, transparent 55%),
       var(--cream);
     color:var(--text-dark);
-    font-family:'Be Vietnam Pro', system-ui, sans-serif;
+    font-family:'Inter', system-ui, sans-serif;
     -webkit-font-smoothing:antialiased;
-    line-height:1.5;
+    line-height:1.6;
   }
 
   .visually-hidden{
@@ -53,20 +53,19 @@
   /* ---------- HERO ---------- */
   .hero{ text-align:center; margin-bottom:clamp(28px,5vw,40px); }
   .eyebrow{
-    font-family:'JetBrains Mono', monospace;
     font-size:13px;
-    letter-spacing:.16em;
+    letter-spacing:.1em;
     text-transform:uppercase;
     color:var(--rose);
     margin:0 0 14px;
-    font-weight:500;
+    font-weight:600;
   }
   .hero h1{
-    font-family:'Fraunces', serif;
-    font-weight:560;
-    font-size:clamp(34px,6vw,56px);
-    line-height:1.08;
-    margin:0 0 16px;
+    font-family:'Lora', serif;
+    font-weight:600;
+    font-size:clamp(32px,5.6vw,50px);
+    line-height:1.22;
+    margin:0 0 18px;
     color:var(--ink-navy);
   }
   .hero h1 em{
@@ -75,64 +74,16 @@
     color:var(--coral);
   }
   .hero-sub{
-    font-size:clamp(15px,2.4vw,18px);
+    font-size:clamp(15px,2.2vw,17px);
     color:var(--text-dark);
     margin:0 0 6px;
     font-weight:500;
   }
   .hero-sub strong{ color:var(--rose); font-weight:700; }
   .hero-note{
-    font-size:12.5px;
-    color:#8A8296;
+    font-size:13px;
+    color:var(--text-muted);
     margin:0;
-  }
-
-  /* ---------- DAILY MESSAGE (for Piz) ---------- */
-  .daily-wish{
-    position:relative;
-    max-width:560px;
-    margin:0 auto clamp(36px,6vw,56px);
-    padding:clamp(20px,4vw,26px) clamp(22px,4vw,30px);
-    background:linear-gradient(135deg, var(--rose) 0%, var(--coral) 100%);
-    border-radius:var(--radius-lg);
-    color:#fff;
-    box-shadow:var(--shadow-soft);
-    text-align:center;
-    overflow:hidden;
-  }
-  .daily-wish::before{
-    content:'';
-    position:absolute; inset:0;
-    background:
-      radial-gradient(120px 80px at 10% 0%, rgba(255,255,255,.25), transparent 70%),
-      radial-gradient(160px 100px at 95% 100%, rgba(255,255,255,.18), transparent 70%);
-    pointer-events:none;
-  }
-  .daily-wish-eyebrow{
-    position:relative;
-    font-family:'JetBrains Mono', monospace;
-    font-size:11.5px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    opacity:.88;
-    margin:0 0 10px;
-    font-weight:500;
-  }
-  .daily-wish-text{
-    position:relative;
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    font-style:italic;
-    font-size:clamp(18px,3vw,23px);
-    line-height:1.4;
-    margin:0;
-  }
-  .daily-wish-date{
-    position:relative;
-    margin:12px 0 0;
-    font-size:12px;
-    opacity:.78;
-    font-weight:500;
   }
 
   /* ---------- CLOCKS ---------- */
@@ -150,41 +101,23 @@
     overflow:hidden;
     position:relative;
     box-shadow:var(--shadow-soft);
-    min-height:240px;
+    min-height:230px;
   }
   .clock-sky{
     position:absolute; inset:0;
     transition:background 1.1s ease;
   }
-  .clock-sky::before{
-    content:'';
-    position:absolute; inset:0;
-    opacity:0;
-    transition:opacity .8s ease;
-    background-image:
-      radial-gradient(2px 2px at 18px 28px, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 70px 70px, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 110px 18px, #fff, transparent),
-      radial-gradient(2px 2px at 150px 90px, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 190px 40px, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 230px 110px, #fff, transparent);
-    background-size:260px 140px;
-    background-repeat:repeat;
-  }
 
-  [data-period="night"]   .clock-sky{ background:linear-gradient(160deg,#0B0E2A 0%, #1B1F3B 55%, #2E2350 100%); }
-  [data-period="dawn"]    .clock-sky{ background:linear-gradient(160deg,#2E2350 0%, #FF8C69 70%, #FFC971 100%); }
-  [data-period="day"]     .clock-sky{ background:linear-gradient(160deg,#6FB7E0 0%, #BEE3F2 55%, #FFE9C7 100%); }
-  [data-period="dusk"]    .clock-sky{ background:linear-gradient(160deg,#FF6F91 0%, #FF8C69 55%, #3D2353 100%); }
-  [data-period="evening"] .clock-sky{ background:linear-gradient(160deg,#2E2350 0%, #1B1F3B 60%, #0B0E2A 100%); }
-
-  [data-period="night"] .clock-sky::before,
-  [data-period="evening"] .clock-sky::before{ opacity:.55; }
+  [data-period="night"]   .clock-sky{ background:linear-gradient(160deg,#171B33 0%, #232A4D 55%, #322956 100%); }
+  [data-period="dawn"]    .clock-sky{ background:linear-gradient(160deg,#322956 0%, #C97B5E 70%, #D9A55E 100%); }
+  [data-period="day"]     .clock-sky{ background:linear-gradient(160deg,#7FB2D6 0%, #C8DEE9 55%, #F3E3C4 100%); }
+  [data-period="dusk"]    .clock-sky{ background:linear-gradient(160deg,#D9667F 0%, #D88A66 55%, #3D3354 100%); }
+  [data-period="evening"] .clock-sky{ background:linear-gradient(160deg,#322956 0%, #1F2344 60%, #171B33 100%); }
 
   .clock-content{
     position:relative;
     z-index:1;
-    padding:clamp(22px,4vw,30px) clamp(20px,4vw,26px);
+    padding:clamp(22px,4vw,28px) clamp(20px,4vw,26px);
     color:var(--text-light);
     height:100%;
     display:flex;
@@ -192,23 +125,17 @@
   }
   [data-period="day"] .clock-content{ color:var(--text-dark); }
 
-  .clock-icon{
-    position:absolute;
-    top:18px; right:20px;
-    font-size:22px;
-    filter:drop-shadow(0 2px 4px rgba(0,0,0,.18));
-  }
   .clock-place{
     margin:0 0 18px;
     font-weight:600;
     font-size:15px;
-    letter-spacing:.02em;
+    letter-spacing:.01em;
     opacity:.92;
   }
   .clock-time{
-    font-family:'JetBrains Mono', monospace;
+    font-family:'Inter', sans-serif;
     font-weight:700;
-    font-size:clamp(34px,6vw,42px);
+    font-size:clamp(32px,5.6vw,40px);
     margin:0 0 6px;
     font-variant-numeric:tabular-nums;
     letter-spacing:-.01em;
@@ -226,10 +153,19 @@
     padding:10px 12px;
     border-radius:12px;
     background:rgba(255,255,255,.16);
-    backdrop-filter:blur(2px);
     width:fit-content;
   }
   [data-period="day"] .clock-activity{ background:rgba(36,31,61,.08); }
+
+  .clock-wish{
+    margin:14px 0 0;
+    font-family:'Lora', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:13.5px;
+    line-height:1.5;
+    opacity:.92;
+  }
 
   /* thread connecting the two cards */
   .thread{
@@ -237,26 +173,14 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    width:56px;
+    width:48px;
   }
   .thread-line{
     position:relative;
     width:100%;
     height:0;
     border-top:2px dashed var(--rose);
-    opacity:.6;
-  }
-  .thread-line::after{
-    content:'💌';
-    position:absolute;
-    left:50%; top:50%;
-    transform:translate(-50%,-50%);
-    font-size:16px;
-    background:var(--cream);
-    border-radius:50%;
-    width:30px; height:30px;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 4px 10px -4px rgba(36,31,61,.4);
+    opacity:.5;
   }
 
   /* ---------- TODO ---------- */
@@ -268,16 +192,16 @@
     border:1px solid #F0E6D6;
   }
   .todo h2{
-    font-family:'Fraunces', serif;
-    font-weight:560;
-    font-size:clamp(22px,3.4vw,28px);
+    font-family:'Lora', serif;
+    font-weight:600;
+    font-size:clamp(21px,3.2vw,26px);
     margin:0 0 4px;
     color:var(--ink-navy);
   }
   .todo-sub{
     margin:0 0 20px;
     font-size:13.5px;
-    color:#8A8296;
+    color:var(--text-muted);
   }
   .todo-form{
     display:flex;
@@ -309,7 +233,7 @@
     cursor:pointer;
     transition:transform .15s ease, background .2s ease;
   }
-  .todo-form button:hover{ background:#FF5C81; }
+  .todo-form button:hover{ background:#C44F69; }
   .todo-form button:active{ transform:scale(.96); }
 
   .todo-list{
@@ -382,20 +306,18 @@
     text-align:center;
     margin-top:48px;
     font-size:13px;
-    color:#A89F8E;
+    color:var(--text-muted);
   }
 
-  /* focus visibility */
   a:focus-visible, button:focus-visible, input:focus-visible{
     outline:3px solid var(--rose);
     outline-offset:2px;
   }
 
-  /* ---------- MOBILE ---------- */
   @media (max-width:760px){
     .clocks{ flex-direction:column; align-items:center; }
     .clock-card{ width:100%; max-width:420px; }
-    .thread{ width:auto; height:36px; }
+    .thread{ width:auto; height:32px; }
     .thread-line{ width:0; height:100%; border-top:none; border-left:2px dashed var(--rose); }
     .todo-form{ flex-direction:column; }
     .todo-form button{ width:100%; }
@@ -416,37 +338,31 @@
     <p class="hero-sub" id="heroSub">Đang tính khoảng cách…</p>
   </header>
 
-  <section class="daily-wish" aria-label="Câu chúc hôm nay">
-    <p class="daily-wish-eyebrow">Câu chúc hôm nay cho Piz</p>
-    <p class="daily-wish-text" id="dailyWishText">—</p>
-    <p class="daily-wish-date" id="dailyWishDate">—</p>
-  </section>
-
   <section class="clocks" aria-label="Đồng hồ hai nơi">
 
     <div class="clock-card" id="cardVN" data-period="night">
       <div class="clock-sky" aria-hidden="true"></div>
       <div class="clock-content">
-        <span class="clock-icon" id="iconVN" aria-hidden="true">🌙</span>
-        <p class="clock-place">🇻🇳 Việt Nam</p>
+        <p class="clock-place">Việt Nam</p>
         <p class="clock-time" id="timeVN">--:--:--</p>
         <p class="clock-date" id="dateVN">—</p>
         <p class="clock-activity" id="activityVN">—</p>
+        <p class="clock-wish" id="wishVN">—</p>
       </div>
     </div>
 
     <div class="thread" aria-hidden="true">
-      <div class="thread-line"></div>
+      <!-- <div class="thread-line"></div> -->
     </div>
 
     <div class="clock-card" id="cardBHM" data-period="night">
       <div class="clock-sky" aria-hidden="true"></div>
       <div class="clock-content">
-        <span class="clock-icon" id="iconBHM" aria-hidden="true">🌙</span>
-        <p class="clock-place">🇺🇸 Bellingham, WA</p>
+        <p class="clock-place">Piz — Bellingham, WA</p>
         <p class="clock-time" id="timeBHM">--:--:--</p>
         <p class="clock-date" id="dateBHM">—</p>
         <p class="clock-activity" id="activityBHM">—</p>
+        <p class="clock-wish" id="wishBHM">—</p>
       </div>
     </div>
 
@@ -467,7 +383,7 @@
     <p class="todo-note">Lưu ý: danh sách sẽ mất khi tải lại trang hoặc đóng tab — trình duyệt artifact không hỗ trợ lưu trữ lâu dài.</p>
   </section>
 
-  <p class="footer">Làm với 🧡 — sẽ bổ sung thêm sau.</p>
+  <p class="footer">Làm với tấm lòng — sẽ bổ sung thêm sau.</p>
 
 </main>
 
@@ -475,7 +391,6 @@
 (function(){
   "use strict";
 
-  /* ================= CLOCKS ================= */
   const ZONES = {
     VN:  { tz: "Asia/Ho_Chi_Minh" },
     BHM: { tz: "America/Los_Angeles" }
@@ -517,17 +432,15 @@
     return 'night';
   }
 
-  const PERIOD_ICON = { night:'🌙', dawn:'🌅', day:'☀️', dusk:'🌇', evening:'🌆' };
-
   function activityFor(hour){
-    if (hour>=0  && hour<5)  return 'đang ngủ say 💤';
-    if (hour>=5  && hour<7)  return 'có thể vừa thức dậy 🌅';
-    if (hour>=7  && hour<11) return 'đang học / làm buổi sáng 📚';
-    if (hour>=11 && hour<13) return 'giờ ăn trưa 🍜';
-    if (hour>=13 && hour<17) return 'đang học / làm buổi chiều 💻';
-    if (hour>=17 && hour<19) return 'tan làm, giờ ăn tối 🍚';
-    if (hour>=19 && hour<22) return 'thời gian thư giãn buổi tối 🌙';
-    return 'chuẩn bị đi ngủ 😴';
+    if (hour>=0  && hour<5)  return 'đang ngủ say';
+    if (hour>=5  && hour<7)  return 'có thể vừa thức dậy';
+    if (hour>=7  && hour<11) return 'đang học / làm buổi sáng';
+    if (hour>=11 && hour<13) return 'giờ ăn trưa';
+    if (hour>=13 && hour<17) return 'đang học / làm buổi chiều';
+    if (hour>=17 && hour<19) return 'tan làm, giờ ăn tối';
+    if (hour>=19 && hour<22) return 'thời gian thư giãn buổi tối';
+    return 'chuẩn bị đi ngủ';
   }
 
   function updateClock(key, tz, now){
@@ -540,13 +453,9 @@
     const card = document.getElementById('card'+key);
     if (card.dataset.period !== period) card.dataset.period = period;
 
-    const icon = document.getElementById('icon'+key);
-    if (icon.textContent !== PERIOD_ICON[period]) icon.textContent = PERIOD_ICON[period];
-
-    return getOffsetMinutes(tz, now);
+    return { offset: getOffsetMinutes(tz, now), hour: p.hour };
   }
 
-  /* ---- distance (approx, reference: Hà Nội) ---- */
   function haversineKm(lat1, lon1, lat2, lon2){
     const R = 6371;
     const toRad = d => d * Math.PI / 180;
@@ -558,45 +467,56 @@
   const distanceKm = haversineKm(21.0285, 105.8542, 48.7519, -122.4787);
   const distanceRounded = Math.round(distanceKm/100)*100;
 
-  /* ================= DAILY WISH FOR PIZ ================= */
-  const WISHES = [
-    "Piz ơi, hôm nay nhớ ăn sáng đầy đủ trước khi chạy deadline nha 🍳",
-    "Dù cách nhau cả múi giờ, hôm nay vẫn nghĩ về Piz đầu tiên 🧡",
-    "Piz cứ làm chậm lại một chút cũng được, không cần vội đâu 🌿",
-    "Hôm nay Piz làm gì cũng giỏi, nhưng nhớ uống nước nhiều nhé 💧",
-    "Mong Piz có một ngày nhẹ nhõm, ít việc khó hơn dự tính 🌤️",
-    "Piz cười nhiều hôm nay nha, dù chỉ vì chuyện nhỏ thôi cũng được 😊",
-    "Hôm nay nếu mệt thì nghỉ một chút, Piz không cần ráng sức quá 🫶",
-    "Piz nhớ ngủ đủ giấc tối nay, đừng để bản thân thiếu ngủ nữa 🌙",
-    "Chúc Piz một ngày mọi việc đều trôi qua nhẹ nhàng như mong đợi ☁️",
-    "Piz giỏi lắm rồi, hôm nay chỉ cần là chính mình thôi cũng đủ 🌟",
-    "Hôm nay có chuyện gì khó, Piz cứ kể, đừng giữ trong lòng một mình 💌",
-    "Piz nhớ ăn trưa đúng giờ, đừng để bụng đói rồi mới nhớ ra 🍱",
-    "Chúc Piz hôm nay gặp toàn điều dễ chịu, không có gì phải lo 🍃",
-    "Dù xa nhau cả đại dương, hôm nay Piz vẫn được thương như mọi ngày 🌊",
-    "Piz làm việc thì làm, nhưng đừng quên dành chút thời gian cho mình 🎧",
-    "Hôm nay Piz xứng đáng được nghỉ ngơi sớm hơn một chút 🕯️",
-    "Chúc Piz giữ được năng lượng vui vẻ tới cuối ngày luôn nha 🎈",
-    "Piz nhớ mặc đủ ấm hoặc đủ mát theo đúng kiểu thời tiết hôm nay nha 🧣",
-    "Hôm nay nếu có gì làm Piz buồn, mong nó qua nhanh thật nhanh 🍂",
-    "Piz cứ tin là mọi thứ đang đi đúng hướng, chỉ cần thêm chút thời gian 🌱",
-    "Chúc Piz một ngày được lắng nghe và được hiểu, dù là từ ai cũng được 🤍",
-    "Piz nhớ uống nước, đừng để tới khi khát mới nhớ ra 🥤",
-    "Hôm nay chúc Piz gặp được điều gì đó nho nhỏ làm vui cả ngày 🍀",
-    "Piz làm tốt rồi đó, hôm nay không cần phải làm tốt hơn nữa đâu 🌼",
-    "Chúc Piz hôm nay đi đâu cũng thấy nhẹ, làm gì cũng thấy ổn 🚶",
-    "Piz nhớ chợp mắt một chút nếu mệt giữa ngày, không sao cả 😴",
-    "Hôm nay mong Piz được ở cạnh những người làm Piz thấy an toàn 🏡",
-    "Piz giỏi việc gì thì cứ làm, còn lại để ngày mai lo cũng được 🗓️",
-    "Chúc Piz một ngày không cần gồng, cứ thoải mái là chính mình 🌸",
-    "Hôm nay dù ở múi giờ nào, Piz vẫn là người được nhớ tới đầu tiên 💛",
-    "Piz nhớ giữ sức khoẻ, đừng để công việc kéo mình đi quá xa 🌾"
+  const SLOTS = [
+    { from:0,  to:5,  label:"Khuya — đang ngủ", wishes:[
+      "Giờ này Piz nên đang ngủ rồi, nếu còn thức thì nhắm mắt lại sớm nha.",
+      "Đêm khuya rồi, việc gì để sáng mai làm cũng được, ngủ trước đã.",
+      "Nếu trằn trọc thì thử để điện thoại xa ra một chút, ngủ sẽ dễ hơn."
+    ]},
+    { from:5,  to:7,  label:"Sáng sớm — vừa thức dậy", wishes:[
+      "Chào buổi sáng. Piz nhớ uống một ly nước trước khi làm gì khác nha.",
+      "Mới thức dậy thì đừng vội cầm điện thoại liền, hít thở một chút đã.",
+      "Buổi sáng mới bắt đầu, mong hôm nay mọi việc đều nhẹ nhàng với Piz."
+    ]},
+    { from:7,  to:11, label:"Buổi sáng — học / làm việc", wishes:[
+      "Đang giờ làm việc, nhớ ngồi thẳng lưng và nghỉ mắt một chút giữa giờ nha.",
+      "Sáng nay nếu việc nhiều thì cứ làm từng phần một, không cần vội hết một lúc.",
+      "Giữa giờ làm, nhớ đứng dậy đi lại vài phút cho đỡ mỏi."
+    ]},
+    { from:11, to:13, label:"Giờ ăn trưa", wishes:[
+      "Tới giờ ăn trưa rồi, đừng để bụng đói rồi mới ăn vội nha.",
+      "Nghỉ trưa một chút, ăn no rồi mới quay lại làm tiếp cũng không sao.",
+      "Buổi trưa nhớ ăn đủ bữa, đừng bỏ qua chỉ vì đang bận."
+    ]},
+    { from:13, to:17, label:"Buổi chiều — học / làm việc", wishes:[
+      "Chiều dễ buồn ngủ, nếu mệt thì chợp mắt vài phút cũng được, không sao cả.",
+      "Còn vài giờ nữa hết ngày làm việc, Piz cứ làm theo nhịp của mình thôi.",
+      "Buổi chiều nhớ uống nước, ngồi lâu quá thì đứng dậy vươn vai một chút."
+    ]},
+    { from:17, to:19, label:"Tan làm — giờ ăn tối", wishes:[
+      "Tan làm rồi, hôm nay vậy là đủ rồi, phần còn lại để ngày mai.",
+      "Giờ ăn tối, ăn món gì mình thích một chút cho thoải mái nha.",
+      "Một ngày làm việc xong rồi, Piz nghỉ ngơi một chút trước khi làm gì tiếp."
+    ]},
+    { from:19, to:22, label:"Buổi tối — thư giãn", wishes:[
+      "Tối rồi, dành chút thời gian cho việc mình thích, không cần làm gì cả cũng được.",
+      "Nếu hôm nay có gì mệt, tối nay cứ để nó lại, không cần mang theo qua ngày mai.",
+      "Buổi tối nhẹ nhàng thôi, không cần giải quyết hết mọi thứ ngay bây giờ."
+    ]},
+    { from:22, to:24, label:"Chuẩn bị đi ngủ", wishes:[
+      "Sắp tới giờ ngủ rồi, Piz thử để điện thoại xa giường một chút nha.",
+      "Ngày hôm nay vậy là đủ rồi, ngủ ngon để có sức cho ngày mai.",
+      "Trước khi ngủ, hít thở sâu vài lần, để đầu óc nhẹ lại rồi mới nhắm mắt."
+    ]}
   ];
 
-  function dayKeyForVN(date){
-    // ngày theo giờ Việt Nam, dùng làm "hạt giống" ổn định trong ngày
-    const fmt = new Intl.DateTimeFormat('en-CA', { timeZone:'Asia/Ho_Chi_Minh', year:'numeric', month:'2-digit', day:'2-digit' });
-    return fmt.format(date); // "YYYY-MM-DD"
+  function findSlot(hour){
+    return SLOTS.find(s => hour >= s.from && hour < s.to) || SLOTS[0];
+  }
+
+  function dayKeyForTz(date, timeZone){
+    const fmt = new Intl.DateTimeFormat('en-CA', { timeZone, year:'numeric', month:'2-digit', day:'2-digit' });
+    return fmt.format(date);
   }
 
   function hashStringToInt(str){
@@ -607,38 +527,33 @@
     return h;
   }
 
-  let lastWishDayKey = null;
+  const lastSlotKeyByCard = { VN:null, BHM:null };
 
-  function updateDailyWish(now){
-    const key = dayKeyForVN(now);
-    if (key === lastWishDayKey) return; // chỉ cập nhật khi đổi ngày
-    lastWishDayKey = key;
+  function updateWishFor(key, tz, now, hour){
+    const slot = findSlot(hour);
+    const dayKey = dayKeyForTz(now, tz);
+    const slotKey = dayKey + '|' + slot.label;
+    if (slotKey === lastSlotKeyByCard[key]) return;
+    lastSlotKeyByCard[key] = slotKey;
 
-    const idx = hashStringToInt(key) % WISHES.length;
-    document.getElementById('dailyWishText').textContent = WISHES[idx];
-
-    // hiển thị ngày theo định dạng dd/mm/yyyy
-    const [y,m,d] = key.split('-');
-    document.getElementById('dailyWishDate').textContent = `Theo ngày ${d}/${m}/${y} (giờ Việt Nam)`;
+    const idx = hashStringToInt(slotKey) % slot.wishes.length;
+    document.getElementById('wish'+key).textContent = slot.wishes[idx];
   }
 
   function tick(){
     const now = new Date();
-    const offVN  = updateClock('VN',  ZONES.VN.tz,  now);
-    const offBHM = updateClock('BHM', ZONES.BHM.tz, now);
-    const diffHours = Math.round((offVN - offBHM) / 60);
+    const vn  = updateClock('VN',  ZONES.VN.tz,  now);
+    const bhm = updateClock('BHM', ZONES.BHM.tz, now);
+    const diffHours = Math.round((vn.offset - bhm.offset) / 60);
     document.getElementById('heroSub').innerHTML =
       `Cách nhau khoảng <strong>${new Intl.NumberFormat('vi-VN').format(distanceRounded)} km</strong> và chênh <strong>${diffHours} giờ</strong>`;
-    updateDailyWish(now);
+    updateWishFor('VN',  ZONES.VN.tz,  now, vn.hour);
+    updateWishFor('BHM', ZONES.BHM.tz, now, bhm.hour);
   }
 
   tick();
   setInterval(tick, 1000);
 
-  /* ================= TODO LIST ================= */
-  /* Lưu ý: artifact không hỗ trợ localStorage/sessionStorage, nên danh sách
-     được giữ trong biến JS (in-memory) — còn nguyên trong phiên làm việc
-     hiện tại, nhưng sẽ mất khi tải lại trang hoặc đóng tab. */
   let todos = [];
 
   const listEl  = document.getElementById('todoList');
